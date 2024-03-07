@@ -1,5 +1,5 @@
 export class Position {
-  constructor(public readonly rowIndex: number, public readonly colIndex: number) {
+  constructor(private readonly rowIndex: number, private readonly colIndex: number) {
     if (rowIndex < 0 || colIndex < 0) {
       throw new RangeError(
         `Index must be greater than 0. row: ${rowIndex}, col: ${colIndex}.`

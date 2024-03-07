@@ -13,7 +13,7 @@ export default (text: string): Tag[] => {
       if (tag.type === 'start') {
         startTagStack.push(tag);
       } else {
-        if (startTagStack.at(-1)?.name !== tag.name) {
+        if (!startTagStack.at(-1)?.isSameTagName(tag)) {
           unpairedTags.push(tag);
           return;
         }

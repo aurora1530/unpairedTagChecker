@@ -25,9 +25,9 @@ export class Tag {
   private static readonly _startTagRegExp = /<(?<name>[a-zA-Z]+?)\b[\s\S]*?>/g;
   private static readonly _endTagRegExp = /<\/(?<name>[a-zA-Z]+?)>/g;
 
-  public readonly name: string;
+  private readonly name: string;
   public readonly type: tagType;
-  public readonly position: Position;
+  private readonly position: Position;
   public readonly isVoid: boolean;
   private constructor(name: string, type: tagType, position: Position) {
     this.name = name;
@@ -66,5 +66,19 @@ export class Tag {
 
   public static toSorted(tags: Tag[]): Tag[] {
     return tags.toSorted((a, b) => (a.position.isPreviousTo(b.position) ? -1 : 1));
+  }
+
+  public isSameTagName(tag: Tag): boolean {
+    return this.name === tag.name;
+  }
+
+  public static formatMessage(unpairedTags: Tag[], filePath?: string): string {
+    return unpairedTags
+      .map((tag) => {
+        const missing = tag.type === 'start' ? 'end' : 'start';
+        const at = (filePath ? `${filePath}:` : ``) + tag.position.formatted();
+        return `Missing ${missing} tag for ${tag.name} tag\n  at ${at}`;
+      })
+      .join('\n');
   }
 }

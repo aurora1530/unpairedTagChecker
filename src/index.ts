@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import findUnpairedTags from './findUnpairedTags';
-import format from './format';
+import { Tag } from './tag';
 import fs from 'node:fs';
 import { escapeComment } from './escape';
 
@@ -10,7 +10,7 @@ filePaths.forEach((filePath) => {
   const data = fs.readFileSync(filePath, 'utf8');
   const escaped = escapeComment(data);
   const unpairedTags = findUnpairedTags(escaped);
-  const formatted = format(unpairedTags, filePath);
+  const formatted = Tag.formatMessage(unpairedTags, filePath);
   console.log(`target file: ${filePath}`);
   if (formatted.length === 0) {
     console.log('No unpaired tags found');

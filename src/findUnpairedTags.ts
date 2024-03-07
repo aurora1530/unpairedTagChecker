@@ -10,12 +10,10 @@ export default (text: string): Tag[] => {
   tags
     .filter((tag) => !tag.isVoid)
     .forEach((tag) => {
-      const { name, type } = tag;
-
-      if (type === 'start') {
+      if (tag.type === 'start') {
         startTagStack.push(tag);
       } else {
-        if (startTagStack.at(-1)?.name !== name) {
+        if (startTagStack.at(-1)?.name !== tag.name) {
           unpairedTags.push(tag);
           return;
         }

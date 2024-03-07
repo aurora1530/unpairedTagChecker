@@ -3,7 +3,7 @@ import { Tag } from './tag';
 export default (text: string): Tag[] => {
   const tags = Tag.fromText(text);
 
-  const startTagStack: Record<string, Tag[]> = {};
+  const startTagStack: Tag[] = [];
 
   const unpairedTags: Tag[] = [];
 
@@ -11,14 +11,16 @@ export default (text: string): Tag[] => {
     .filter((tag) => !tag.isVoid)
     .forEach((tag) => {
       const { name, type } = tag;
-      if (!(name in startTagStack)) {
-        startTagStack[name] = [];
-      }
 
       if (type === 'start') {
-        startTagStack[name].push(tag);
+        startTagStack.push(tag);
       } else {
-        const pair = startTagStack[name].pop();
+        if (startTagStack.at(-1)?.name !== name) {
+          unpairedTags.push(tag);
+          return;
+        }
+
+        const pair = startTagStack.pop();
         if (pair === undefined) {
           unpairedTags.push(tag);
         }

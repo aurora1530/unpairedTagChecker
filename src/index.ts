@@ -3,7 +3,7 @@
 import findUnpairedTags from './findUnpairedTags';
 import format from './format';
 import fs from 'node:fs';
-import { escapeComment } from 'escape';
+import { escapeComment } from './escape';
 
 const filePaths = process.argv.slice(2);
 filePaths.forEach((filePath) => {

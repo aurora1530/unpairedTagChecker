@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import findUnpairedTags from './findUnpairedTags';
 import format from './format';
 import { program } from 'commander';

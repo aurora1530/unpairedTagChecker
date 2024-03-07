@@ -25,5 +25,26 @@ describe('findUnpairedTags', () => {
         position: new Position(2, 6),
       }),
     ]);
+
+    const text2 = `<div>
+<div>
+<span>
+</div>
+</span>
+</div>`;
+    const unpairedTags2 = findUnpairedTags(text2);
+    expect(unpairedTags2.length).toBe(2);
+    expect(unpairedTags2).toEqual([
+      expect.objectContaining({
+        name: 'div',
+        type: 'start',
+        position: new Position(0, 0),
+      }),
+      expect.objectContaining({
+        name: 'div',
+        type: 'end',
+        position: new Position(3, 0),
+      }),
+    ]);
   });
 });

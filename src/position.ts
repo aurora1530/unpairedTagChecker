@@ -24,4 +24,8 @@ export class Position {
   public isFollowingTo(position: Position): boolean {
     return !(this._isEqualsTo(position) || this.isPreviousTo(position));
   }
+
+  public formatted(): string {
+    return `${this.rowIndex + 1}:${this.colIndex + 1}`;
+  }
 }

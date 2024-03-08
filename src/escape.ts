@@ -17,6 +17,6 @@ export const escaper = (text: string, regexps: RegExp[]) => {
  */
 export const escapeRegexps = {
   comment: /<!--[\s\S]*?-->/g,
-  codeblock: /^```[\s\S]*?^```/gm,
+  codeblock: /^ {0,3}```[\s\S]*?^ {0,3}```/gm,
   inlineCode: /`[^`]+`/g,
 };

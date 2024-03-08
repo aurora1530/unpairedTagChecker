@@ -1,4 +1,4 @@
-import { Position } from '../src/position';
+import { Position } from '../position';
 
 describe('Position Class Test', () => {
   it('should throw an error if the row or col index is less than 0', () => {

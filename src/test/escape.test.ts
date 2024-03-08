@@ -1,7 +1,7 @@
-import { escapeRegexps, escaper } from '../src/escape';
+import { escapeRegexps, escaper } from '../escape';
 import fs from 'node:fs';
 import path from 'node:path';
-import { getKeys } from '../src/utils';
+import { getKeys } from '../utils';
 
 const escapeType = [...getKeys(escapeRegexps), 'all'] as const;
 

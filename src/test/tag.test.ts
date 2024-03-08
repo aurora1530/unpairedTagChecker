@@ -1,5 +1,5 @@
-import { Tag } from '../src/tag';
-import { Position } from '../src/position';
+import { Tag } from '../tag';
+import { Position } from '../position';
 describe('Tag Class Test', () => {
   it('should create tags from text', () => {
     const text1 = `<div>

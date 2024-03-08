@@ -1,5 +1,5 @@
-import { Position } from '../src/position';
-import findUnpairedTags from '../src/findUnpairedTags';
+import { Position } from '../position';
+import findUnpairedTags from '../findUnpairedTags';
 
 describe('findUnpairedTags', () => {
   it('should find unpaired tags', () => {

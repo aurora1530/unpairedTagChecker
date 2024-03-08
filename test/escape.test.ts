@@ -1,23 +1,17 @@
-import { escapeCodeblock, escapeComment, escapeInlineCode, escaper } from '../src/escape';
+import { escapeRegexps, escaper } from '../src/escape';
 import fs from 'node:fs';
 import path from 'node:path';
+import { getKeys } from '../src/utils';
 
-const escapeType = ['comment', 'codeblock', 'inlineCode', 'all'] as const;
+const escapeType = [...getKeys(escapeRegexps), 'all'] as const;
 
 const targetEscaper = (type: (typeof escapeType)[number]) => {
   return (text: string) => {
     switch (type) {
-      case 'comment':
-        return escaper(text, [escapeComment]);
-      case 'codeblock':
-        return escaper(text, [escapeCodeblock]);
-      case 'inlineCode':
-        return escaper(text, [escapeInlineCode]);
       case 'all':
-        // must be in this order
-        // comment must be escaped first
-        // code block must be escaped before inline code
-        return escaper(text, [escapeComment, escapeCodeblock, escapeInlineCode]);
+        return escaper(text, Object.values(escapeRegexps));
+      default:
+        return escaper(text, [escapeRegexps[type]]);
     }
   };
 };

@@ -8,8 +8,15 @@ export const escaper = (text: string, regexps: RegExp[]) => {
   );
 };
 
-export const escapeComment = /<!--[\s\S]*?-->/g;
-
-export const escapeCodeblock = /^```[\s\S]*?^```/gm;
-
-export const escapeInlineCode = /`[^`]+`/g;
+/**
+ * must be in this order.
+ *
+ * comment must be escaped first.
+ *
+ * code block must be escaped before inline code.
+ */
+export const escapeRegexps = {
+  comment: /<!--[\s\S]*?-->/g,
+  codeblock: /^```[\s\S]*?^```/gm,
+  inlineCode: /`[^`]+`/g,
+};
